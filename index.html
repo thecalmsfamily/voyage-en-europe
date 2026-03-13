@@ -400,11 +400,29 @@
   }
 
   /* ─── CUSTOM MARKERS ─── */
-  .city-marker {
-    background: #1a1a2e;
-    border: 2.5px solid white;
+  .van-marker {
+    background: white;
+    border: 2px solid #2a7a4b;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(42,122,75,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    line-height: 1;
+    transition: all 0.2s;
+  }
+
+  .route-marker {
+    background: white;
+    border: 2px solid #e07b20;
     border-radius: 50%;
-    box-shadow: 0 2px 8px rgba(26,26,46,0.35);
+    box-shadow: 0 2px 8px rgba(224,123,32,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    line-height: 1;
     transition: all 0.2s;
   }
 
@@ -827,8 +845,12 @@
           <span>Route du voyage</span>
         </div>
         <div class="legend-item">
-          <div class="legend-dot" style="background:#1a1a2e;"></div>
-          <span>Villes étapes</span>
+          <div style="width:16px;height:16px;background:white;border:2px solid #2a7a4b;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;">🚐</div>
+          <span>Spots vanlife</span>
+        </div>
+        <div class="legend-item">
+          <div style="width:16px;height:16px;background:white;border:2px solid #e07b20;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;">🏔️</div>
+          <span>Routes panoramiques</span>
         </div>
         <div class="legend-item">
           <div class="legend-dot" style="background:#c9933a; border-radius:3px;"></div>
@@ -1066,6 +1088,8 @@ var highlights = [
 
   {name:"Sources thermales de Pamukkale", coords:[37.916440, 29.117290], image:"https://images.partir.com/2VLalI66KXfALWC6GrImdKHTKc0=/1200x800/filters:sharpen(0.3,0.3,true)/lieux-interet/turquie/turquie-egee.jpg", desc:" Explorer les bassins d'eau chaude et les formations de travertin", poi:["À compléter"]},
 
+  {name:"Cité antique d'Aphrodisias", coords:[37.708960, 28.722330], image:"https://images.partir.com/hdE1B0RrSDbpaRkFr3aBKBJos-A=/1200x800/filters:sharpen(0.3,0.3,true)/lieux-interet/turquie/turquie-aphrodisias.jpg", desc:" Découvrez les ruines antiques bien préservées de la Cité d'Aphrodisias", poi:["À compléter"]},
+
   {name:"Éphèse", coords:[37.939720, 27.340830], image:"https://images.partir.com/1HNe1q9BFQ3ZKs7n2h78qCwHtfM=/1200x800/filters:sharpen(0.3,0.3,true)/lieux-interet/turquie/turquie-ephese.jpg", desc:" Une des cités grecques antiques les plus renommées et des mieux conservées de Turquie", poi:["À compléter"]},
 
   {name:"Izmir", coords:[38.412730, 27.138380], image:"https://images.partir.com/bM5C6nxMrYFezL7dplbjDOJOjiA=/1200x800/filters:sharpen(0.3,0.3,true)/lieux-interet/turquie/turquie-izmir.jpg", desc:" Bienvenue en Grèce… ou plutôt, dans la partie la plus grecque de la Turquie", poi:["À compléter"]},
@@ -1112,6 +1136,8 @@ var highlights = [
 
   {name:"Le parc national de Lovcen", coords:[42.405000, 18.818330], image:"https://images.partir.com/ozcQcaZVcCYTqxipEQI8CiOWaTs=/1200x800/filters:sharpen(0.3,0.3,true)/lieux-interet/montenegro/montenegro-parc-lovcen.jpg", desc:" Si vous planifiez de descendre la côte Adriatique au départ de Kotor, vous aurez l'option de passer par le mont Lovcen", poi:["À compléter"]},
 
+  {name:"Les bouches de Kotor", coords:[42.420670, 18.768250], image:"https://images.partir.com/vSveb9VoZS-Z9hEjyPWSJu1OfTk=/1200x800/filters:sharpen(0.3,0.3,true)/lieux-interet/montenegro/montenegro-kotor.jpg", desc:" C’est l’un des endroits les plus prisés du pays, alors impossible de ne pas commencer par ce lieu dans notre liste des incontournables", poi:["À compléter"]},
+
   {name:"Dubrovnik et ses remparts", coords:[42.650661, 18.094424], image:"https://images.partir.com/ozcQcaZVcCYTqxipEQI8CiOWaTs=/1200x800/filters:sharpen(0.3,0.3,true)/lieux-interet/montenegro/montenegro-parc-lovcen.jpg", desc:" Si Dubrovnik est surnommée la perle de l’Adriatique, est-ce pour le bleu envoûtant de ses côtes ou pour son aspect rare et précieux ?", poi:["À compléter"]},
 
   {name:"Split et le village de Trogir", coords:[43.516387, 16.250189], image:"https://images.partir.com/Uk-5udYTMdGdugri9TU4lPR8wQM=/1200x800/filters:sharpen(0.3,0.3,true)/lieux-interet/croatie/croatie-trogir.jpg", desc:" Split est la deuxième ville de Croatie après sa capitale, Zagreb, et c’est certainement l’une des plus charmantes", poi:["À compléter"]},
@@ -1122,21 +1148,66 @@ var highlights = [
 
   {name:"Lac de Bled", coords:[46.363890, 14.096940], image:"https://images.partir.com/cDeOE46qlUEV3MB5BzCh0ZNDRa0=/1200x800/filters:sharpen(0.3,0.3,true)/lieux-interet/slovenie/slovenie-bled.jpg", desc:" Le Lac de Bled : Un Joyau Slovène", poi:["À compléter"]},
 
+  {name:"Parc national du Triglav", coords:[46.334278, 13.828464], image:"https://images.partir.com/i_8L-d8LtNsFU4S7zws7QOs_pUE=/1200x800/filters:sharpen(0.3,0.3,true)/lieux-interet/slovenie/slovenie-triglav.jpg", desc:" Découvrez la beauté naturelle du Parc national du Triglav en Slovénie", poi:["À compléter"]},
+
   {name:"Parc national des Dolomites", coords:[46.169940, 12.036636], image:"https://images.partir.com/il2p3EgAK7fPjyytMbw5DRLXOPA=/1200x800/filters:sharpen(0.3,0.3,true)/lieux-interet/italie/milan-et-region-des-lacs/italie-nord-parc-dolomites.jpg", desc:" Le parc national des Dolomites offre un équilibre parfait entre les montagnes grandioses du Sud Tyrol autrichien et la douceur des alpages italiens", poi:["À compléter"]},
 
 ];
 
+/* ═══ SPOTS VANLIFE ═══ */
+var vanspots = [
+  {name:"Plage sauvage des Lofoten", coords:[68.0843,13.3003], desc:"Plage immense, montagne + mer, coucher de soleil incroyable.", poi:["Bivouac sur la plage","Vue sur les montagnes arctiques"]},
+  {name:"Senja viewpoint sauvage", coords:[69.4457,17.3730], desc:"Fjords, très peu de monde, parking nature.", poi:["Vue panoramique sur les fjords","Calme absolu"]},
+  {name:"Fjord sauvage Geiranger", coords:[62.1015,7.2059], desc:"Vue directe sur le Geirangerfjord.", poi:["Vue spectaculaire sur le fjord","Nuit au bord de l\'eau"]},
+  {name:"Plateau du Cap Nord", coords:[71.1710,25.7836], desc:"Parking sauvage autour du plateau. Point le plus au nord d\'Europe.", poi:["Soleil de minuit en été","Vue sur l\'Arctique"]},
+  {name:"Lac sauvage Finlande", coords:[66.3827,29.3240], desc:"Spot très calme dans la forêt, Parc national d\'Oulanka.", poi:["Forêt primaire","Baignade possible"]},
+  {name:"Plateau sauvage Durmitor", coords:[43.1465,19.0906], desc:"Un des meilleurs spots vanlife d\'Europe. Parc national du Durmitor.", poi:["Monténégro sauvage","Canyon du Tara à proximité"]},
+  {name:"Vallée sauvage Bosnie", coords:[43.6270,17.5620], desc:"Immense plateau, Blidinje Nature Park.", poi:["Plateau désert","Paysage alpin"]},
+  {name:"Rivière turquoise Albanie", coords:[39.9170,20.1825], desc:"Parking nature près de Blue Eye, source turquoise spectaculaire.", poi:["Source naturelle bleue","Eau limpide"]},
+  {name:"Canyon sauvage Albanie", coords:[40.7012,20.3083], desc:"Osum Canyon, très beau bivouac possible.", poi:["Canyon impressionnant","Bivouac en hauteur"]},
+  {name:"Cappadoce sauvage", coords:[38.6431,34.8271], desc:"Spot parfait pour voir les montgolfières au lever du soleil.", poi:["Vue sur les montgolfières","Formations rocheuses"]},
+  {name:"Vallée cachée Cappadoce", coords:[38.6415,34.8470], desc:"Bivouac très tranquille dans la vallée.", poi:["Paysage lunaire","Calme total"]},
+  {name:"Vallée de la Soca", coords:[46.3410,13.6860], desc:"Rivière turquoise incroyable, Parc national du Triglav.", poi:["Eau turquoise cristalline","Randonnées alpines"]},
+  {name:"Spot sauvage Dolomites", coords:[46.5580,12.2900], desc:"Parking panorama avec vue sur les sommets.", poi:["Vue 360° sur les Dolomites","Coucher de soleil rose"]},
+  {name:"Passo Giau", coords:[46.4828,12.0647], desc:"Vue spectaculaire sur les Dolomites à 2236m.", poi:["Col alpin mythique","Vue panoramique exceptionnelle"]},
+  {name:"Montagne sauvage Croatie", coords:[44.9056,15.6110], desc:"Spot calme dans la forêt, près des Lacs de Plitvice.", poi:["Forêt dense","Calme total"]}
+];
+
+/* ═══ ROUTES PANORAMIQUES ═══ */
+var scenicRoutes = [
+  {name:"Trollstigen", coords:[62.4570,7.6665], desc:"11 lacets spectaculaires dans la montagne norvégienne.", poi:["Route en lacets mythique","Vue sur les cascades"]},
+  {name:"Atlantic Ocean Road", coords:[63.0302,7.3865], desc:"Route célèbre avec ponts sur l\'océan Atlantique.", poi:["Ponts sur l\'océan","Paysage côtier unique"]},
+  {name:"Aurlandsfjellet (route)", coords:[60.9109,7.1913], desc:"Route fjord → montagne, l\'une des plus belles de Norvège.", poi:["Vue sur le fjord","Descente spectaculaire"]},
+  {name:"Senja National Scenic Route", coords:[69.4530,17.4200], desc:"Une des plus belles routes côtières de Norvège.", poi:["Côte sauvage","Vue sur les fjords"]},
+  {name:"Route Durmitor Ring", coords:[43.1280,19.0910], desc:"Une des routes montagne les plus sauvages d\'Europe.", poi:["Passage canyon du Tara","Paysage alpin"]},
+  {name:"Route de Kotor", coords:[42.4246,18.7712], desc:"Serpentine spectaculaire au-dessus de la Baie de Kotor.", poi:["Vue sur la baie","25 lacets serrés"]},
+  {name:"Route Meteora", coords:[39.7217,21.6300], desc:"Route entre les monastères perchés sur des falaises.", poi:["Monastères suspendus","Paysage unique au monde"]},
+  {name:"Route Cappadoce panoramique", coords:[38.6460,34.8350], desc:"Formations rocheuses uniques, cheminées de fées.", poi:["Paysage lunaire","Vue sur les vallées"]},
+  {name:"Vršič Pass", coords:[46.4340,13.7400], desc:"Route alpine incroyable en Slovénie, 50 virages.", poi:["Col alpin à 1611m","Vue sur les Alpes juliennes"]},
+  {name:"Grande route des Dolomites", coords:[46.4100,11.8440], desc:"Cols + sommets mythiques des Dolomites italiennes.", poi:["Cols mythiques","Paysage dolomitique"]}
+];
+
 /* ═══ GROUPES DE CALQUES ═══ */
-var cityMarkers = L.layerGroup();
 var poiMarkers  = L.layerGroup();
+var vanLayer    = L.layerGroup();
+var routeLayer  = L.layerGroup();
 
 /* ═══ CRÉATION ICÔNES ═══ */
-function makeCityIcon(size) {
+function makeVanIcon() {
   return L.divIcon({
-    html: '<div class="city-marker" style="width:' + size + 'px;height:' + size + 'px;"></div>',
+    html: '<div class="van-marker" style="width:28px;height:28px;">🚐</div>',
     className: '',
-    iconSize: [size, size],
-    iconAnchor: [size/2, size/2]
+    iconSize: [28, 28],
+    iconAnchor: [14, 14]
+  });
+}
+
+function makeRouteIcon() {
+  return L.divIcon({
+    html: '<div class="route-marker" style="width:26px;height:26px;">🏔️</div>',
+    className: '',
+    iconSize: [26, 26],
+    iconAnchor: [13, 13]
   });
 }
 
@@ -1167,13 +1238,22 @@ function buildPopup(p) {
   return html;
 }
 
-/* ═══ AJOUT VILLES ═══ */
-var cityMarkerRefs = [];
-stages.forEach(function(p, idx) {
-  var m = L.marker(p.coords, { icon: makeCityIcon(12) })
+/* ═══ AJOUT SPOTS VANLIFE ═══ */
+var vanMarkerRefs = [];
+vanspots.forEach(function(p) {
+  var m = L.marker(p.coords, { icon: makeVanIcon() })
     .bindPopup(buildPopup(p), { maxWidth: 240 });
-  cityMarkers.addLayer(m);
-  cityMarkerRefs.push({ marker: m, data: p, index: idx });
+  vanLayer.addLayer(m);
+  vanMarkerRefs.push({ marker: m, data: p });
+});
+
+/* ═══ AJOUT ROUTES PANORAMIQUES ═══ */
+var routeMarkerRefs = [];
+scenicRoutes.forEach(function(p) {
+  var m = L.marker(p.coords, { icon: makeRouteIcon() })
+    .bindPopup(buildPopup(p), { maxWidth: 240 });
+  routeLayer.addLayer(m);
+  routeMarkerRefs.push({ marker: m, data: p });
 });
 
 /* ═══ AJOUT POI ═══ */
@@ -1185,27 +1265,22 @@ highlights.forEach(function(p) {
   poiMarkerRefs.push({ marker: m, data: p });
 });
 
-map.addLayer(cityMarkers);
 map.addLayer(poiMarkers);
+map.addLayer(vanLayer);
+map.addLayer(routeLayer);
 
 /* ═══ MISE À JOUR TAILLE DES MARQUEURS SELON ZOOM ═══ */
 function updateMarkerSizes() {
   var zoom = map.getZoom();
 
-  // Villes — taille variable selon zoom
-  var citySize = 10;
-  if (zoom >= 5) citySize = 12;
-  if (zoom >= 6) citySize = 16;
-  if (zoom >= 8) citySize = 20;
-  if (zoom >= 10) citySize = 26;
+  var poiSize = 10;
+  if (zoom >= 5) poiSize = 12;
+  if (zoom >= 6) poiSize = 16;
+  if (zoom >= 8) poiSize = 20;
+  if (zoom >= 10) poiSize = 26;
 
-  cityMarkerRefs.forEach(function(ref) {
-    ref.marker.setIcon(makeCityIcon(citySize));
-  });
-
-  // POI — même taille fixe que les villes, toujours visibles
   poiMarkerRefs.forEach(function(ref) {
-    ref.marker.setIcon(makePoiIcon(citySize));
+    ref.marker.setIcon(makePoiIcon(poiSize));
   });
 }
 
@@ -1554,11 +1629,13 @@ function focusStop(name) {
     }
   }
   if (!found) {
-    for (var j = 0; j < cityMarkerRefs.length; j++) {
-      if (cityMarkerRefs[j].data.name === name) {
-        found = cityMarkerRefs[j];
-        break;
-      }
+    for (var j = 0; j < vanMarkerRefs.length; j++) {
+      if (vanMarkerRefs[j].data.name === name) { found = vanMarkerRefs[j]; break; }
+    }
+  }
+  if (!found) {
+    for (var k = 0; k < routeMarkerRefs.length; k++) {
+      if (routeMarkerRefs[k].data.name === name) { found = routeMarkerRefs[k]; break; }
     }
   }
 
