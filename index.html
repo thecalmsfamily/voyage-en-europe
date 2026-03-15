@@ -1070,6 +1070,16 @@
   }
 
 
+  /* ─── MARQUEUR DÉPART ─── */
+  .depart-marker {
+    background: #2a7a4b;
+    border: 2.5px solid white;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    box-shadow: 0 2px 8px rgba(42,122,75,0.45);
+    transition: all 0.2s;
+  }
+
   /* ─── MARQUEUR POINT D'ATTENTION ─── */
   .warning-marker {
     background: white;
@@ -1262,7 +1272,7 @@
     </div>
     <div class="stat" style="border-left:1px solid var(--border);padding-left:20px;">
       <div class="stat-num" id="countdownNum" style="color:var(--red);">…</div>
-      <div class="stat-label">Jours avant<br>le départ 🚐</div>
+      <div class="stat-label">Jours avant le départ 🚐</div>
     </div>
   </div>
 </header>
@@ -1292,10 +1302,10 @@
     <!-- BOUTONS CARTE -->
     <div class="map-btns" id="mapBtns">
       <button class="suggest-btn" style="position:relative;bottom:auto;left:auto;transform:none;" onclick="openModal()">
-        💡 Proposer
+        💡 Proposer une idée
       </button>
       <button class="suggest-btn" style="position:relative;bottom:auto;left:auto;transform:none;background:var(--ink);" onclick="openSuggestions()">
-        👀 Voir les idées
+        👀 Voir les idées proposées
       </button>
     </div>
     <div class="map-hint">🔍 Zoom pour voir les points remarquables</div>
@@ -1663,7 +1673,22 @@ var vanspots = [
   {name:"Vallée de la Soca", coords:[46.3410,13.6860], desc:"Rivière turquoise incroyable, Parc national du Triglav.", poi:["Eau turquoise cristalline","Randonnées alpines"]},
   {name:"Spot sauvage Dolomites", coords:[46.5580,12.2900], desc:"Parking panorama avec vue sur les sommets.", poi:["Vue 360° sur les Dolomites","Coucher de soleil rose"]},
   {name:"Passo Giau", coords:[46.4828,12.0647], desc:"Vue spectaculaire sur les Dolomites à 2236m.", poi:["Col alpin mythique","Vue panoramique exceptionnelle"]},
-  {name:"Montagne sauvage Croatie", coords:[44.9056,15.6110], desc:"Spot calme dans la forêt, près des Lacs de Plitvice.", poi:["Forêt dense","Calme total"]}
+  {name:"Montagne sauvage Croatie", coords:[44.9056,15.6110], desc:"Spot calme dans la forêt, près des Lacs de Plitvice.", poi:["Forêt dense","Calme total"]},
+  {name:"Forêt noire", coords:[48.5396,8.2194], desc:"", poi:[""]},
+  {name:"Šumava", coords:[48.9906,13.6158], desc:"", poi:[""]},
+  {name:"Tatras", coords:[49.1667,20.2833], desc:"", poi:[""]},
+  {name:"Białowieża", coords:[52.7003,23.8737], desc:"", poi:[""]},
+  {name:"Trakai lac", coords:[54.6372,24.9342], desc:"", poi:[""]},
+  {name:"Gauja", coords:[57.2535,24.8693], desc:"", poi:[""]},
+  {name:"Soomaa", coords:[58.4298,24.7056], desc:"", poi:[""]},
+  {name:"Lac Inari", coords:[68.9039,27.0286], desc:"", poi:[""]},
+  {name:"Fulufjället", coords:[61.5814,12.6786], desc:"", poi:[""]},
+  {name:"Saxon Switzerland", coords:[50.9155,14.1520], desc:"", poi:[""]},
+  {name:"Transylvanie", coords:[45.5236,25.3640], desc:"", poi:[""]},
+  {name:"Météores", coords:[39.7217,21.6307], desc:"", poi:[""]},
+  {name:"Llogara pass", coords:[40.2075,19.5736], desc:"", poi:[""]},
+  {name:"Krka", coords:[43.8020,15.9722], desc:"", poi:[""]},
+  {name:"Bled", coords:[46.3690,14.1136], desc:"", poi:[""]},
 ];
 
 /* ═══ ROUTES PANORAMIQUES ═══ */
@@ -1677,7 +1702,16 @@ var scenicRoutes = [
   {name:"Route Meteora", coords:[39.7217,21.6300], desc:"Route entre les monastères perchés sur des falaises.", poi:["Monastères suspendus","Paysage unique au monde"]},
   {name:"Route Cappadoce panoramique", coords:[38.6460,34.8350], desc:"Formations rocheuses uniques, cheminées de fées.", poi:["Paysage lunaire","Vue sur les vallées"]},
   {name:"Vršič Pass", coords:[46.4340,13.7400], desc:"Route alpine incroyable en Slovénie, 50 virages.", poi:["Col alpin à 1611m","Vue sur les Alpes juliennes"]},
-  {name:"Grande route des Dolomites", coords:[46.4100,11.8440], desc:"Cols + sommets mythiques des Dolomites italiennes.", poi:["Cols mythiques","Paysage dolomitique"]}
+  {name:"Grande route des Dolomites", coords:[46.4100,11.8440], desc:"Cols + sommets mythiques des Dolomites italiennes.", poi:["Cols mythiques","Paysage dolomitique"]},
+  {name:"Passo Giau, Dolomites", coords:[46.486633, 12.049801], desc:"", poi:["Cols mythiques","Paysage dolomitique"]},
+  {name:"SH8 Llogara Pass, Albanie", coords:[40.205251, 19.586053], desc:"Transition spectaculaire entre la mer Adriatique et la Riviera albanaise", poi:[""]},
+  {name:"Route côtière Antalya – Kas, Turquie", coords:[36.344395, 30.276089], desc:"Connue pour ses panoramas spectaculaires entre falaises et mer turquoise, elle relie la station balnéaire d’Antalya à la petite ville côtière de Kaş, sur la Riviera turque", poi:[""]},
+  {name:"Schwarzwaldhochstraße", coords:[48.567229, 8.220000], desc:"La Schwarzwaldhochstraße traverse le Parc national de la Forêt-Noire et longe des sites naturels remarquables", poi:[""]},
+  {name:"Jadranska Magistrala", coords:[43.739814, 15.907674], desc:"Étroitement bordée de falaises et de villages côtiers, elle offre des vues spectaculaires sur les îles, la mer et les massifs comme le Biokovo", poi:[""]},
+  {name:"Route de la Laponie E75", coords:[67.800933, 26.774665], desc:"La Route de la Laponie désigne, dans le langage des voyageurs, la portion nord de la route européenne E75 qui traverse la Laponie, principalement en Finlande (entre Rovaniemi, Sodankylä, Inari et Utsjoki) puis jusqu’à la frontière norvégienne", poi:[""]},
+  {name:"Route de Geiranger", coords:[62.063266, 7.247769], desc:"La Route de Geiranger (en norvégien Geirangervegen) est une route panoramique emblématique de Norvège reliant le village de Geiranger à la région montagneuse du comté de Møre og Romsdal", poi:[""]},
+  {name:"Route des Lofoten E10", coords:[68.239295, 13.755307], desc:"La Route des Lofoten E10 est une route nationale norvégienne reliant les îles Lofoten et Vesterålen à la partie continentale du nord de la Norvège", poi:[""]},
+  {name:"Lysevegen", coords:[59.055163, 6.663690], desc:"Lysevegen est une route panoramique de montagne située dans le comté d’Agder, au sud-ouest de la Norvège", poi:[""]},
 ];
 
 /* ══════════════════════════════════════════
@@ -1702,7 +1736,37 @@ var warnings = [
     coords: [59.800, 24.800],
     desc: "Traversée en ferry obligatoire (2h30). Réservation recommandée en haute saison.",
     poi: ["Compagnies : Tallink, Viking Line", "À réserver à l'avance en été"]
-  }
+  },
+    name: "Trollstigen",
+    coords: [62.455033, 7.666028],
+    desc: "Cols susceptibles de fermer",
+    poi: ["Ferme souvent octobre"]
+  },
+    name: "Durmitor",
+    coords: [43.216806, 19.126028],
+    desc: "Cols susceptibles de fermer",
+    poi: ["Neige possible mi décembre"]
+  },
+    name: "Col de Vršič",
+    coords: [46.433340, 13.744745],
+    desc: "Cols susceptibles de fermer",
+    poi: ["Fermeture possible hiver"]
+  },
+    name: "Dolomites",
+    coords: [46.415942, 11.857946],
+    desc: "Cols susceptibles de fermer",
+    poi: ["Certains cols ferment"]
+  },
+    name: "Parc national de Llogara",
+    coords: [40.213018, 19.575482],
+    desc: "Routes pouvant être difficiles",
+    poi: ["routes parfois étroites ou non asphaltées"]
+  },
+    name: "Transfăgărășan",
+    coords: [45.453520, 24.624813],
+    desc: "Routes pouvant être difficiles",
+    poi: ["Fermée octobre → juin"]
+  },
 ];
 
 
@@ -1713,30 +1777,39 @@ var routeLayer    = L.layerGroup();
 var warningLayer  = L.layerGroup();
 
 /* ═══ CRÉATION ICÔNES ═══ */
-function makeVanIcon() {
+function makeVanIcon(size) {
   return L.divIcon({
-    html: '<div class="van-marker" style="width:28px;height:28px;">🚐</div>',
+    html: '<div class="van-marker" style="width:' + size + 'px;height:' + size + 'px;font-size:' + Math.round(size * 0.65) + 'px;">🚐</div>',
     className: '',
-    iconSize: [28, 28],
-    iconAnchor: [14, 14]
+    iconSize: [size, size],
+    iconAnchor: [size/2, size/2]
   });
 }
 
-function makeRouteIcon() {
+function makeRouteIcon(size) {
   return L.divIcon({
-    html: '<div class="route-marker" style="width:26px;height:26px;">🏔️</div>',
+    html: '<div class="route-marker" style="width:' + size + 'px;height:' + size + 'px;font-size:' + Math.round(size * 0.6) + 'px;">🏔️</div>',
     className: '',
-    iconSize: [26, 26],
-    iconAnchor: [13, 13]
+    iconSize: [size, size],
+    iconAnchor: [size/2, size/2]
   });
 }
 
-function makeWarningIcon() {
+function makeWarningIcon(size) {
   return L.divIcon({
-    html: '<div class="warning-marker" style="width:26px;height:26px;">⚠️</div>',
+    html: '<div class="warning-marker" style="width:' + size + 'px;height:' + size + 'px;font-size:' + Math.round(size * 0.6) + 'px;">⚠️</div>',
     className: '',
-    iconSize: [26, 26],
-    iconAnchor: [13, 13]
+    iconSize: [size, size],
+    iconAnchor: [size/2, size/2]
+  });
+}
+
+function makeDepartIcon(size) {
+  return L.divIcon({
+    html: '<div class="depart-marker" style="width:' + size + 'px;height:' + size + 'px;"></div>',
+    className: '',
+    iconSize: [size, size],
+    iconAnchor: [size/2, size]
   });
 }
 
@@ -1770,7 +1843,7 @@ function buildPopup(p) {
 /* ═══ AJOUT SPOTS VANLIFE ═══ */
 var vanMarkerRefs = [];
 vanspots.forEach(function(p) {
-  var m = L.marker(p.coords, { icon: makeVanIcon() })
+  var m = L.marker(p.coords, { icon: makeVanIcon(12) })
     .bindPopup(buildPopup(p), { maxWidth: 240 });
   vanLayer.addLayer(m);
   vanMarkerRefs.push({ marker: m, data: p });
@@ -1779,7 +1852,7 @@ vanspots.forEach(function(p) {
 /* ═══ AJOUT ROUTES PANORAMIQUES ═══ */
 var routeMarkerRefs = [];
 scenicRoutes.forEach(function(p) {
-  var m = L.marker(p.coords, { icon: makeRouteIcon() })
+  var m = L.marker(p.coords, { icon: makeRouteIcon(12) })
     .bindPopup(buildPopup(p), { maxWidth: 240 });
   routeLayer.addLayer(m);
   routeMarkerRefs.push({ marker: m, data: p });
@@ -1788,7 +1861,7 @@ scenicRoutes.forEach(function(p) {
 /* ═══ AJOUT POINTS D'ATTENTION ═══ */
 var warningMarkerRefs = [];
 warnings.forEach(function(p) {
-  var m = L.marker(p.coords, { icon: makeWarningIcon() })
+  var m = L.marker(p.coords, { icon: makeWarningIcon(12) })
     .bindPopup(buildPopup(p), { maxWidth: 260 });
   warningLayer.addLayer(m);
   warningMarkerRefs.push({ marker: m, data: p });
@@ -1808,19 +1881,42 @@ map.addLayer(vanLayer);
 map.addLayer(routeLayer);
 map.addLayer(warningLayer);
 
+/* ═══ MARQUEUR DÉPART — Ivry-sur-Seine ═══ */
+var departData = {
+  name: "Départ — Ivry-sur-Seine 🟢",
+  coords: [48.813, 2.383],
+  desc: "Point de départ du voyage CALM. 07 juillet 2026.",
+  poi: ["180 jours de route", "27 pays", "~25 000 km"]
+};
+var departMarker = L.marker(departData.coords, { icon: makeDepartIcon(13), zIndexOffset: 1000 })
+  .bindPopup(buildPopup(departData), { maxWidth: 240 });
+departMarker.addTo(map);
+
 /* ═══ MISE À JOUR TAILLE DES MARQUEURS SELON ZOOM ═══ */
 function updateMarkerSizes() {
   var zoom = map.getZoom();
 
-  var poiSize = 10;
-  if (zoom >= 5) poiSize = 12;
-  if (zoom >= 6) poiSize = 16;
-  if (zoom >= 8) poiSize = 20;
-  if (zoom >= 10) poiSize = 26;
+  var size = 10;
+  if (zoom >= 5) size = 13;
+  if (zoom >= 6) size = 18;
+  if (zoom >= 8) size = 23;
+  if (zoom >= 10) size = 30;
 
   poiMarkerRefs.forEach(function(ref) {
-    ref.marker.setIcon(makePoiIcon(poiSize));
+    ref.marker.setIcon(makePoiIcon(size));
   });
+  vanMarkerRefs.forEach(function(ref) {
+    ref.marker.setIcon(makeVanIcon(size));
+  });
+  routeMarkerRefs.forEach(function(ref) {
+    ref.marker.setIcon(makeRouteIcon(size));
+  });
+  warningMarkerRefs.forEach(function(ref) {
+    ref.marker.setIcon(makeWarningIcon(size));
+  });
+  if (typeof departMarker !== 'undefined') {
+    departMarker.setIcon(makeDepartIcon(size));
+  }
 }
 
 map.on('zoomend', updateMarkerSizes);
